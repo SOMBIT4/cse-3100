@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import FilterByBreed from '../component/filter_by_breed';
+import SearchByName from '../component/search_by_name';
 
 const availableCats = [
   { name: 'Whiskers', age: '2', breed: 'Sphynx' },
@@ -48,36 +49,42 @@ export default function AvailableCats() {
     }
   };
 
+  const handleSearchChange = (searchTerm) => {
+    const lowercasedTerm = searchTerm.toLowerCase();
+    setFilteredCats(cats.filter((cat) => cat.name.toLowerCase().includes(lowercasedTerm)));
+  };
+
   return (
     <section className="text-center mt-4">
       <h2>Available Cats</h2>
-      <div className="d-flex mt-2 mb-4">
+      <div className="col-md-15"><p>Meet our adorable cats looking for their forever home!</p></div>
+      <div className="d-flex justify-content-between align-items-start mt-2 mb-4">
+         
+        <div className="col-md-3">
+          <SearchByName onSearch={handleSearchChange} />
+        </div>
         <div className="col-md-3">
           <FilterByBreed breeds={breeds} onFilterChange={handleFilterChange} />
         </div>
-        <div className="col-md-9">
-          <div className="col-md-8"><p>Meet our adorable cats looking for their forever home!</p></div>
-          
-          <div className="mt-2 row g-5 cats-container" id="cats-container">
-            {filteredCats.map((cat, i) => (
-              <div key={i} className="col-md-4">
-                <div className="cat-card">
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
-                    className="img-fluid mb-2"
-                    style={{ borderRadius: '8px', height: '200px', objectFit: 'cover' }}
-                  />
-                  <div className="cat-info">
-                    <h3 className="h5 mb-1">{cat.name}</h3>
-                    <p className="mb-0">Age: {cat.age}</p>
-                    <p className="mb-0">Breed: {cat.breed}</p>
-                  </div>
-                </div>
+      </div>
+      <div className="mt-2 row g-5 cats-container" id="cats-container">
+        {filteredCats.map((cat, i) => (
+          <div key={i} className="col-md-4">
+            <div className="cat-card">
+              <img
+                src={cat.image}
+                alt={cat.name}
+                className="img-fluid mb-2"
+                style={{ borderRadius: '8px', height: '200px', objectFit: 'cover' }}
+              />
+              <div className="cat-info">
+                <h3 className="h5 mb-1">{cat.name}</h3>
+                <p className="mb-0">Age: {cat.age}</p>
+                <p className="mb-0">Breed: {cat.breed}</p>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
