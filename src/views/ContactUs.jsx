@@ -35,6 +35,7 @@ const ContactUs = () => {
             type="text"
             className="form-control"
             id="name"
+            placeholder='Enter your name'
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -50,6 +51,7 @@ const ContactUs = () => {
             type="tel"
             className="form-control"
             id="phone"
+            placeholder='Enter your phone number'
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -65,6 +67,7 @@ const ContactUs = () => {
             type="email"
             className="form-control"
             id="email"
+            placeholder='Enter your email'
             name="email"
             value={formData.email}
             onChange={handleChange}
